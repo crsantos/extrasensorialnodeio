@@ -6,3 +6,9 @@ body {
 a {
   color: #00B7FF;
 }
+
+canvas#drawCanvas{
+	margin: 5 10px;
+	background-color: #FFE;
+	border: 1px dotted #DDD;
+}
