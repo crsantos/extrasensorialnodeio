@@ -4,7 +4,7 @@
 
 // pin numbers:
 const int ledPin =  13;       // the number of the LED pin
-const int lightPin = 0;       //define a pin for Photo resistor - analog 0
+const int lightPin = 0;       //define a pin for Photo resistor
 const int threshold = 250;
 
 // Variables
@@ -28,9 +28,9 @@ void loop()
 
     if (ledState == LOW){
       ledState = HIGH;
-      Serial.print("Hello world from arduino! [");  // prints hello with ending line break
+      Serial.print("{\"thermistor\" : ");  // prints hello with ending line break
       Serial.print(analogRead(lightPin), DEC);
-      Serial.println("]");
+      Serial.println("}");
     }else
       ledState = LOW;
     digitalWrite(ledPin, ledState);
