@@ -1,3 +1,3 @@
 # Node code
 
-# Node must handle all the serial data sent
+# TODO: Node must handle all the serial data sent from different sensors

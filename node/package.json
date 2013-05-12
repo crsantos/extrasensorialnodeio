@@ -1,11 +1,14 @@
 {
-  "name": "arduinosocketio",
-  "description": "Arduino + socketio RT feed",
+  "name": "extrasensorialnodeio",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "start": "node app"
+  },
   "dependencies": {
-    "express": "3.2.4",
-	"socket.io":"0.9.14",
-	"serialport":"1.1.0"
+    "express": "3.0.0rc4",
+    "jade": "*",
+    "socket.io":"0.9.14",
+    "serialport":"1.1.0"
   }
 }
