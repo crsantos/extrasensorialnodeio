@@ -5,7 +5,6 @@
 
  var express = require('express')
  , routes = require('./routes')
- , user = require('./routes/user')
  , http = require('http')
  , path = require('path')
   , serialport = require("serialport")    // include the serialport library
@@ -19,7 +18,8 @@
   , serialData = {}                      // object to hold what goes out to the client
   , IP_ADDRESS = getIPAddress()
   , app = express()
-  , config = require('./config/environment.js')(app, express);
+  , config = require('./config/environment.js')(app, express)
+  , routes = require('./config/routes.js')(app, express, routes);
 
 // App configs
 app.configure(function(){
@@ -33,9 +33,6 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
-// App Routes
-app.get('/', routes.index);
-app.get('/users', user.list);
 
 // Serial Port setup
 var myPort = new SerialPort(TTY, { 

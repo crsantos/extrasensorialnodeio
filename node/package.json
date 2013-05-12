@@ -9,6 +9,7 @@
     "express": "3.0.0rc4",
     "jade": "*",
     "socket.io":"0.9.14",
-    "serialport":"1.1.0"
+    "serialport":"1.1.0",
+    "colors":"0.6.0-1"
   }
 }
