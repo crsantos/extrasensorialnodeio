@@ -19,7 +19,8 @@
   , IP_ADDRESS = getIPAddress()
   , app = express()
   , config = require('./config/environment.js')(app, express)
-  , routes = require('./config/routes.js')(app, express, routes);
+  , routes = require('./config/routes.js')(app, express, routes)
+  , $ = require('jquery').create();
 
 // App configs
 app.configure(function(){
