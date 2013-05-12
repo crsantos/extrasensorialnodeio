@@ -11,6 +11,7 @@
   , SerialPort  = serialport.SerialPort   // make a local instance of serial
   , sio = require('socket.io')
   , os = require('os')
+  , platform = os.platform()
   , ifaces = os.networkInterfaces()
   // , TTY = "/dev/ttyUSB0"
   , TTY = '/dev//tty.usbserial-A700e17k'
@@ -45,7 +46,7 @@ console.log("Binded serialPort =>\t\t[\033[34m" + myPort.path + "]\033[0m");
 // Server binding
 var server =  http.createServer(app).listen(app.get('port'));
 
-console.log("Server listening on =>\t\t[\033[31m"+ IP_ADDRESS + ":" + app.get('port') + "\033[0m]");
+console.log("Server[" + platform + "] listening on =>\t\t[\033[31m"+ IP_ADDRESS + ":" + app.get('port') + "\033[0m]");
 
 // socket.io listens on server
 var io =      sio.listen(server);
