@@ -16,7 +16,8 @@
   , TTY = '/dev//tty.usbserial-A700e17k'
   , PORT = 8080
   , serialData = {}                      // object to hold what goes out to the client
-  , IP_ADDRESS = getIPAddress()
+  , helpers = require('./helpers.js')
+  , IP_ADDRESS = helpers.getIPAddress() 
   , app = express()
   , config = require('./config/environment.js')(app, express)
   , routes = require('./config/routes.js')(app, express, routes);
@@ -66,20 +67,3 @@ io.sockets.on('connection', function (socket) {
 });
 
 /**********************************************************************/
-
-/**
-  @method Gets the IP address
-  @returns the IP addres or falls back to 0.0.0.0
-*/
-  function getIPAddress() {
-    var interfaces = require('os').networkInterfaces();
-    for (var devName in interfaces) {
-      var iface = interfaces[devName];
-      for (var i = 0; i < iface.length; i++) {
-        var alias = iface[i];
-        if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal)
-          return alias.address;
-      }
-    }
-    return '0.0.0.0';
-  }
