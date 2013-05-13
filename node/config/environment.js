@@ -3,6 +3,11 @@ module.exports = function(app, express){
     // GENERAL
     app.configure(function() {
         app.use(express.logger('dev'));
+        app.set('mailOptions', {
+          host: 'localhost',
+          port: '25',
+          from: 'extrasensorialnodeio@example.com'
+        });
         console.log ("General config :: [loaded] ");
     });
 
