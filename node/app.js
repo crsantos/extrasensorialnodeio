@@ -18,6 +18,7 @@
   , serialData = {}                      // object to hold what goes out to the client
   , helpers = require('./helpers.js')
   , IP_ADDRESS = helpers.getIPAddress() 
+  , redis = require("redis").createClient()
   , app = express()
   , config = require('./config/environment.js')(app, express)
   , routes = require('./config/routes.js')(app, express, routes);
@@ -57,6 +58,21 @@ io.sockets.on('connection', function (socket) {
 
   // if there's a socket client, listen for new serial data:  
   myPort.on('data', function (data) {
+
+    var json= JSON.parse(data);
+    var keys = Object.keys(json);
+    for (var i = keys.length - 1; i >= 0; i--) {
+      var key = keys[i];
+      redis.get(key, function(error, result) {
+          if (error)
+            console.log('Error: '+ error);
+          else
+            console.log('Previous '+ key + ': ' + result);
+          redis.set(key, json[key]);
+      });
+      
+    };
+
     // set the value property of scores to the serial string:
     serialData.value = data;
     // for debugging, you should see this in Terminal:
