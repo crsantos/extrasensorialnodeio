@@ -1,4 +1,35 @@
+var Pushover = require('node-pushover')
+
 Helpers = {
+
+  /**
+  @
+  */
+  pusher: new Pushover({
+    // WARNING: Please define those in your ~/.bashrc
+    token:  process.env['PUSHOVER_TOKEN'],
+    user:   process.env['PUSHOVER_USER']
+  }),
+
+  /** 
+    @method Sends a push notif
+      Usage:
+    helpers.sendPushNotification('titletest', 'l0l0l0l0l', function(res, err){
+      if(err.status != 1){
+          console.log("We have an error:");
+          console.log(err.stack);
+        }else{
+          console.log("Message sent successfully");
+        }
+    });
+  *
+  */
+  sendPushNotification: function(title, message, callbackFunction){
+    
+    var push = this.pusher;
+    // A callback function is defined:
+    push.send(title, message, callbackFunction);
+  },
 
   /**
   @method Gets the IP address
