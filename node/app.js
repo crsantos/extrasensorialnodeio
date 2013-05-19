@@ -14,7 +14,7 @@
   , ifaces = os.networkInterfaces()
   // , TTY = "/dev/ttyUSB0"
   , TTY = '/dev//tty.usbserial-A700e17k'
-  , PORT = 8080
+  , PORT = 3000
   , serialData = {}                      // object to hold what goes out to the client
   , helpers = require('./helpers.js')
   , IP_ADDRESS = helpers.getIPAddress() 
@@ -23,9 +23,11 @@
   , config = require('./config/environment.js')(app, express)
   , routes = require('./config/routes.js')(app, express, routes);
 
+exports.ipaddress = IP_ADDRESS+":"+PORT;
+
 // App configs
 app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
+  app.set('port', process.env.PORT || PORT);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());
@@ -45,8 +47,9 @@ console.log("Binded serialPort =>\t\t[\033[34m" + myPort.path + "]\033[0m");
 
 // Server binding
 var server =  http.createServer(app).listen(app.get('port'));
+exports.ipaddress = IP_ADDRESS + ":" + app.get('port');
 
-console.log("Server[" + process.platform + "] listening on =>\t\t[\033[31m"+ IP_ADDRESS + ":" + app.get('port') + "\033[0m]");
+console.log("Server[" + process.platform + "] listening on =>\t\t[\033[31m"+ exports.ipaddress + "\033[0m]");
 
 // socket.io listens on server
 var io =      sio.listen(server);
