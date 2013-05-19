@@ -1,3 +1,3 @@
-[submodule "ios/vendor/SocketRocket"]
-	path = ios/vendor/SocketRocket
-	url = git://github.com/square/SocketRocket.git
+[submodule "ios/vendor/socket.IO-objc"]
+	path = ios/vendor/socket.IO-objc
+	url = git://github.com/pkyeck/socket.IO-objc.git
