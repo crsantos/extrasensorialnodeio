@@ -11,4 +11,6 @@ canvas#drawCanvas{
 	margin: 5 10px;
 	background-color: #FFE;
 	border: 1px dotted #DDD;
+    padding: 1px;
+    border-radius: 4px;
 }

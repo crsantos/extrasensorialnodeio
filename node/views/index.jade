@@ -27,14 +27,29 @@ block extrahead
         console.log("DRAWING!"); console.log(value);
         var c = document.getElementById("drawCanvas");
         var ctx = c.getContext("2d");
-        ctx.fillRect(0,0,150,75);
-        ctx.fillStyle=colorToHex('rgb(120, 220, ' + value + ')');
+
+        // clear old drawings
+        ctx.clearRect(0, 0, c.width, c.height);
+        
+        // Create gradient
+        var grd=ctx.createRadialGradient(c.width/2,c.height/2,value/5,c.width/2,c.height/2,value);
+        grd.addColorStop(0,"yellow");
+        grd.addColorStop(1,"black");
+
+        // Fill with gradient
+        ctx.fillStyle=grd;
+        ctx.fillRect(0,0,c.width, c.height);
+
+        // add text
+        ctx.font="18px Helvetica";
+        ctx.fillStyle = 'white';
+        ctx.textAlign = 'right';
+        ctx.fillText(value+"%", c.width - 5 , c.height-10);
     }
 
   script(type='text/javascript')
     // open a connection to the serial server:
     var socket = io.connect('http://#{ipaddress}');
-    console.log("#{ipaddress}");
     // when you get a serialdata event, do this:
     socket.on('serialEvent', function (data) {
       // look for the textDisplay element in the HTML below:
@@ -44,7 +59,9 @@ block extrahead
       var values = JSON.parse(data.value);
       element.innerHTML = "Thermistor has value: " + values.thermistor;
       // will colotr the rect based on the ambient light
-      drawRect( Math.round((values.thermistor*255)/1024) );
+      // Zero light = 1024 so inverting result - and then converting 
+      //  to its matching percent (*100/1024)
+      drawRect( Math.round((1024 - values.thermistor)*100/1024) );
     });
     // handshake
     socket.on('message', function (data) {
@@ -65,7 +82,7 @@ block content
   | 
   #textDisplay Text will show up here
 
-  canvas(width=500, height=100)#drawCanvas
+  canvas(width=200, height=100)#drawCanvas
 
   // Draw canvas script
   script(type='text/javascript')
