@@ -1,6 +1,6 @@
 # extrasensorialnodeio
 
-Arduino -> Rpi -> node.js, sensing everything and emitting with the help of socket.io
+Arduino -> Rpi -> node.js -> iOS Client, sensing everything and emitting with the help of socket.io
 
 ## Requirements
 ### Hardware
@@ -15,3 +15,4 @@ Arduino -> Rpi -> node.js, sensing everything and emitting with the help of sock
     * socket.io
     * express.js
 * redis-server
+* socket.IO-objc
